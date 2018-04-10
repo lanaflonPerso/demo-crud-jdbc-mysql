@@ -13,9 +13,9 @@ La BDD livre est créer directement à partir des données du SCRIPT SQL 'schema
 Les tables sont alimentées automatiquement à partir du SCRIPT SQL 'data.sql' dans le package ressources
 
 3.Les API 
->>http://localhost:8080/api/livres (pour voir toutes les données de tous les livres GET)  
->>http://localhost:8080/api/livre/{id} (pour voir ou supprimer un livre GET/DELETE)  
->>http://localhost:8080/api/livre/{id}  'pour modifier PUT format attendu de type JSON ex: {"id": 1,"titre": "machin5","auteur": 2,"genre": 3})  
->>http://localhost:8080/api/livre (pour ajouter un livre POST format attendu de type JSON ex: {"titre": "machin5","auteur": 2,"genre": 3})  
+>>http://localhost:8080/api/livres (pour voir toutes les données de tous les livres methode GET)  
+>>http://localhost:8080/api/livre/{id} (pour voir ou supprimer un livre methode GET et DELETE)  
+>>http://localhost:8080/api/livre/{id} (pour modifier un livre methode PUT format attendu de type JSON ex: {"id": 1,"titre": "machin5","auteur": 2,"genre": 3})  
+>>http://localhost:8080/api/livre (pour ajouter un livre methode POST format attendu de type JSON ex: {"titre": "machin5","auteur": 2,"genre": 3})  
 
 
