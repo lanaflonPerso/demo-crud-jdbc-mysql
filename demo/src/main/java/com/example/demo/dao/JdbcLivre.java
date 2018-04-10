@@ -11,10 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,8 +165,40 @@ public class JdbcLivre implements LivreDao {
 
     @Override
     public Livre updateLivre(Livre livre) throws Exception {
-        return null;
+        Livre result = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            // Prepare the SQL query
+            String sql = "UPDATE livre SET titre = ?, id_auteur = ?, id_genre = ? WHERE id = ?";
+            pstmt = datasource.getConnection().prepareStatement(sql);
+            pstmt.setString(1, livre.getTitre());
+            pstmt.setLong(2, livre.getAuteur() );
+            pstmt.setLong(3, livre.getGenre());
+            pstmt.setLong(4, livre.getId() );
+
+            // Log info
+            logSQL(pstmt);
+
+            // Run the the update query
+            int resultCount = pstmt.executeUpdate();
+            if(resultCount != 1)
+                throw new Exception("Livre not found !");
+
+            result = livre;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.error("SQL Error !:" + pstmt.toString(), e);
+            throw e;
+        } finally {
+            pstmt.close();
+        }
+
+        return result;
     }
+
+
 
 
     // Méthode pour effacer un livre

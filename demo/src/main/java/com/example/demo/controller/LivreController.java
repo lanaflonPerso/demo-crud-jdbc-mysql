@@ -61,6 +61,20 @@ public class LivreController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(resultLivre);
     }
+
+    @RequestMapping(value = "/livre/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateLivre(@RequestBody Livre livre,@PathVariable Long id) throws Exception {
+        Livre result = null;
+        
+        try {
+            result = livreService.updateLivre(id, livre);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     //localhost:8080/api/livre/{id} pour supprimer un livre
     @RequestMapping(value = "/livre/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteLivre(@PathVariable Long id) {
